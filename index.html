@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Klätterföretaget</title>
+  <meta name="description" content="Klätterkurser och klätterresor för alla nivåer. Upptäck klättringens värld med Klätterföretaget.">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  background: url("DSC_0710.jpg") center/cover no-repeat fixed;
+  color: #f1f1f1;
+}
+
+/* Mörk overlay över hela sidan */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: -1;
+}
+
+/* Skip link (hoppa till innehåll) */
+.skip-link{
+  position: absolute;
+  left: -999px;
+  top: 10px;
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  z-index: 10000;
+  border: 1px solid rgba(255,255,255,0.22);
+}
+.skip-link:focus{
+  left: 12px;
+  outline: 3px solid rgba(74,163,223,0.9);
+  outline-offset: 3px;
+}
+
+/* Visually hidden utility */
+.sr-only{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 240px;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 30px 0;
+  position: fixed;
+  height: 100vh;
+  backdrop-filter: blur(6px);
+}
+
+.logo {
+  padding: 0 30px 30px;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  margin-bottom: 30px;
+}
+
+.logo h1 { font-size: 22px; }
+
+/* Mobil: hamburger-knapp */
+.menu-toggle{
+  display: none;
+  margin-top: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: left;
+}
+.menu-toggle:hover { background: rgba(255,255,255,0.12); }
+
+.menu { list-style: none; }
+
+.menu a {
+  display: block;
+  padding: 14px 30px;
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.85;
+  transition: all 0.25s ease;
+}
+
+.menu a:hover,
+.menu a.active {
+  opacity: 1;
+  background: rgba(255,255,255,0.08);
+  border-left: 3px solid #4aa3df;
+}
+
+/* Focus styles */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(74,163,223,0.9);
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+/* Content */
+.content { margin-left: 240px; padding: 60px; }
+
+/* Pages */
+.page { display: none; animation: fadeIn 0.4s ease; }
+.page.active { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero */
+.hero {
+  background:
+    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+    url("klattring.jpg") center/cover no-repeat;
+  padding: 90px 60px;
+  border-radius: 12px;
+  margin-bottom: 50px;
+}
+
+.hero h2 { font-size: 46px; margin-bottom: 20px; }
+.hero p { font-size: 20px; line-height: 1.6; }
+
+/* Cards */
+.card {
+  background: rgba(0,0,0,0.6);
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card h3 { margin-bottom: 15px; }
+.card p, .card li { color: #e0e0e0; }
+
+/* Clickable cards as buttons */
+.card-btn{
+  width: 100%;
+  text-align: left;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+.card-btn.card{
+  display: block;
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: #4aa3df;
+  color: #fff;
+  border-radius: 6px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+.btn:hover { background: #358ac6; transform: translateY(-1px); }
+.btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.back-btn { background: #777; }
+.back-btn:hover { background: #666; }
+
+/* ---------- Datum-boxar (nu <button>) ---------- */
+.date-box{
+  width: 100%;
+  text-align: left;
+  background: rgba(0,0,0,0.6);
+  padding: 22px;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  border: none;
+  color: inherit;
+}
+
+.date-box h4{
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.date-box p{ color: #e0e0e0; margin: 4px 0; }
+
+.price-tag{
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  background: rgba(74,163,223,0.92);
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+/* ---------- Formulär ---------- */
+.form-group { margin-top: 14px; }
+.form-group label{
+  display:block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: rgba(255,255,255,0.92);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  font-size: 16px; /* mobil: undvik iOS-zoom */
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: rgba(255,255,255,0.65); }
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+  border-color: rgba(74,163,223,0.85);
+  background: rgba(255,255,255,0.11);
+  transform: translateY(-1px);
+}
+
+.error-message{
+  margin-top: 8px;
+  color: #ffb7b7;
+  font-size: 14px;
+}
+
+input.error,
+select.error,
+textarea.error{
+  border-color: rgba(255,120,120,0.9) !important;
+  background: rgba(255,80,80,0.08) !important;
+}
+
+.terms-section{
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+}
+
+.terms-section a{ color: #8fd0ff; }
+.terms-section a:hover{ color: #c6e9ff; }
+
+.checkbox-group{
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.checkbox-group input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: #4aa3df;
+}
+
+.checkbox-group label{
+  color: rgba(255,255,255,0.92);
+  line-height: 1.35;
+}
+
+/* ---------- “Tre gamla bilderna” ---------- */
+.kalymnos-hero3{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin: 18px 0 16px;
+}
+.kalymnos-hero3 img{
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: pointer;
+}
+
+/* ---------- Mosaik ---------- */
+.kalymnos-mosaic{
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 58px;
+  grid-auto-flow: dense;
+  gap: 12px;
+  margin: 18px 0 6px;
+}
+
+.shot{
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+  filter: saturate(1.04);
+  background: rgba(0,0,0,0.25);
+}
+
+.shot img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 0.55s ease;
+}
+
+.shot.big    { grid-column: span 6; grid-row: span 6; }
+.shot.medium { grid-column: span 4; grid-row: span 4; }
+.shot.small  { grid-column: span 3; grid-row: span 3; }
+.shot.tiny   { grid-column: span 2; grid-row: span 2; }
+
+.shot.feature::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.18), transparent 55%);
+  pointer-events: none;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 24px;
+}
+.lightbox.open { display: flex; }
+
+.lightbox img {
+  max-width: min(1100px, 92vw);
+  max-height: 86svh; /* mobilvänligare än vh på iOS */
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+}
+@supports not (height: 1svh){
+  .lightbox img { max-height: 86vh; }
+}
+
+.lightbox .close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: rgba(255,255,255,0.12);
+  color: white;
+  font-size: 22px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.lightbox .close:hover { background: rgba(255,255,255,0.2); }
+
+/* Hover-effekter endast för enheter som har hover (mus/trackpad) */
+@media (hover: hover) and (pointer: fine){
+  .card-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+  }
+  .date-box:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+    background: rgba(0,0,0,0.66);
+  }
+  .kalymnos-hero3 img:hover{
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 18px 52px rgba(0,0,0,0.8);
+  }
+  .shot:hover{
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 18px 52px rgba(0,0,0,0.8);
+    filter: saturate(1.12);
+  }
+  .shot:hover img{ transform: scale(1.08); }
+}
+
+/* Responsive */
+@media (max-width: 1100px){
+  .kalymnos-mosaic{ grid-template-columns: repeat(8, 1fr); grid-auto-rows: 64px; }
+  .shot.big{ grid-column: span 8; grid-row: span 8; }
+  .shot.medium{ grid-column: span 4; grid-row: span 4; }
+  .shot.small{ grid-column: span 4; grid-row: span 4; }
+  .shot.tiny{ grid-column: span 2; grid-row: span 2; }
+}
+
+@media (max-width: 768px) {
+  .sidebar { position: relative; width: 100%; height: auto; }
+  .content { margin-left: 0; padding: 30px 20px; }
+  .hero { padding: 60px 20px; }
+  .hero h2 { font-size: 32px; }
+
+  /* Mobil: bättre prestanda (fixed bakgrund kan hacka) */
+  body{ background-attachment: scroll; }
+
+  /* Mobilmeny: göm listan tills man öppnar */
+  .menu-toggle{ display: block; }
+  .menu{ display: none; }
+  .sidebar.open .menu{ display: block; }
+  .logo{ margin-bottom: 14px; }
+  .logo button.menu-toggle{ margin-bottom: 10px; }
+
+  .kalymnos-mosaic{ grid-template-columns: repeat(4, 1fr); grid-auto-rows: 72px; }
+  .shot.big{ grid-column: span 4; grid-row: span 4; }
+  .shot.medium{ grid-column: span 2; grid-row: span 2; }
+  .shot.small{ grid-column: span 2; grid-row: span 2; }
+  .shot.tiny{ grid-column: span 1; grid-row: span 1; }
+}
+</style>
+</head>
+
+<body>
+  <a href="#main-content" class="skip-link">Hoppa till innehåll</a>
+
+  <nav class="sidebar" role="navigation" aria-label="Huvudmeny">
+    <div class="logo">
+      <h1>🧗 Klätterföretaget</h1>
+      <!-- Mobil hamburger -->
+      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">☰ Meny</button>
+    </div>
+
+    <ul class="menu" id="mobile-menu">
+      <li><a href="#start" class="active" onclick="showPage('start'); return false;">Start</a></li>
+      <li><a href="#kurser" onclick="showPage('kurser'); return false;">Kurser</a></li>
+      <li><a href="#resor" onclick="showPage('resor'); return false;">Resor</a></li>
+      <li><a href="#om-oss" onclick="showPage('om-oss'); return false;">Om oss</a></li>
+    </ul>
+  </nav>
+
+  <main class="content" id="main-content" tabindex="-1">
+    <div id="start" class="page active">
+      <div class="hero">
+        <h2>Välkommen till äventyret</h2>
+        <p>Upptäck klättringens värld med Sveriges ledande klätterföretag. Vi erbjuder kurser för alla nivåer och organiserar resor till världens bästa klätterställen.</p>
+        <a href="#kurser" class="btn" onclick="showPage('kurser'); return false;">Upptäck våra kurser</a>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>🎯 Nybörjarkurser</h3>
+          <p>Perfekt start för dig som aldrig provat klättring tidigare. Lär dig grunderna i en trygg och rolig miljö.</p>
+        </div>
+        <div class="card">
+          <h3>⛰️ Klätterresor</h3>
+          <p>Fantastiska resor till ikoniska klätterställen runt om i världen. Från Kalymnos till Yosemite.</p>
+        </div>
+        <div class="card">
+          <h3>👥 Erfarna instruktörer</h3>
+          <p>Våra certifierade instruktörer har mångårig erfarenhet och brinner för att dela med sig av sin kunskap.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="kurser" class="page">
+      <h2 style="color: #ffffff; margin-bottom: 30px; font-size: 36px;">Våra kurser</h2>
+
+      <button type="button" class="card card-btn" onclick="showToprepsDates()">
+        <h3>Topprepsklättring inomhus</h3>
+        <p>Två tillfällen á två timmar, du lär dig grunderna i topprepsklättring inomhus och får vid godkänd kurs grönt kort.</p>
+        <p><strong>Pris:</strong> Kväll 1000kr/ Dag 800kr | <strong>Längd:</strong> 2 tillfällen á två timmar</p>
+      </button>
+
+      <div class="card">
+        <h3>Grundkurs i klättring</h3>
+        <p>En helkurs där du lär dig allt du behöver för att börja klättra säkert. Vi går igenom utrustning, knutar, säkring och grundläggande klätterteknik.</p>
+        <p><strong>Pris:</strong> 1 500 kr | <strong>Längd:</strong> 2 dagar</p>
+      </div>
+
+      <div class="card">
+        <h3>Fördjupningskurs</h3>
+        <p>För dig som har grunderna och vill utvecklas vidare. Vi fokuserar på teknik, styrka och mental träning.</p>
+        <p><strong>Pris:</strong> 2 000 kr | <strong>Längd:</strong> 3 dagar</p>
+      </div>
+
+      <div class="card">
+        <h3>Utomhusklättring</h3>
+        <p>Lär dig att klättra ute i naturen. Vi täcker topplineklättring, placering av säkringar och naturvård.</p>
+        <p><strong>Pris:</strong> 2 500 kr | <strong>Längd:</strong> 2 dagar</p>
+      </div>
+
+      <div class="card">
+        <h3>Privatlektion</h3>
+        <p>Skräddarsydd undervisning efter dina önskemål och behov. Perfekt för att snabbt utvecklas inom specifika områden.</p>
+        <p><strong>Pris:</strong> 800 kr/timme</p>
+      </div>
+    </div>
+
+    <div id="topreps-dates" class="page">
+      <button type="button" class="btn back-btn" onclick="showPage('kurser')">← Tillbaka till kurser</button>
+      <h2 style="color: #ffffff; margin: 18px 0 20px; font-size: 36px;">Välj kurstillfälle - Topprepsklättring inomhus</h2>
+
+      <button type="button" class="date-box" onclick="showRegistrationForm('10/3 och 16/3', '10:30-12:30', 800)">
+        <h4>📅 10/3 och 16/3</h4>
+        <p>⏰ Tid: 10:30-12:30</p>
+        <p>📍 Dagtid</p>
+        <span class="price-tag">800 kr</span>
+      </button>
+
+      <button type="button" class="date-box" onclick="showRegistrationForm('18/3 och 23/3', '18:00-20:00', 1000)">
+        <h4>📅 18/3 och 23/3</h4>
+        <p>⏰ Tid: 18:00-20:00</p>
+        <p>📍 Kvällstid</p>
+        <span class="price-tag">1000 kr</span>
+      </button>
+
+      <button type="button" class="date-box" onclick="showRegistrationForm('28/4 och 7/5', '18:00-20:00', 1000)">
+        <h4>📅 28/4 och 7/5</h4>
+        <p>⏰ Tid: 18:00-20:00</p>
+        <p>📍 Kvällstid</p>
+        <span class="price-tag">1000 kr</span>
+      </button>
+
+      <button type="button" class="date-box" onclick="showRegistrationForm('29/4 och 30/4', '10:30-12:30', 800)">
+        <h4>📅 29/4 och 30/4</h4>
+        <p>⏰ Tid: 10:30-12:30</p>
+        <p>📍 Dagtid</p>
+        <span class="price-tag">800 kr</span>
+      </button>
+
+      <button type="button" class="date-box" onclick="showRegistrationForm('18/5 och 26/5', '18:00-20:00', 1000)">
+        <h4>📅 18/5 och 26/5</h4>
+        <p>⏰ Tid: 18:00-20:00</p>
+        <p>📍 Kvällstid</p>
+        <span class="price-tag">1000 kr</span>
+      </button>
+    </div>
+
+    <div id="registration-form" class="page">
+      <button type="button" class="btn back-btn" onclick="showToprepsDates()">← Tillbaka till datum</button>
+      <h2 style="color: #ffffff; margin: 18px 0 20px; font-size: 36px;">Anmälan</h2>
+
+      <div class="card">
+        <h3 id="selected-course-info" style="margin-bottom: 8px;"></h3>
+        <p style="color: rgba(255,255,255,0.8); margin-bottom: 10px;">Fyll i dina uppgifter så skickar vi en bekräftelse.</p>
+
+        <div id="registration-status" class="sr-only" aria-live="polite"></div>
+
+        <div class="form-group">
+          <label for="name">Namn <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <input type="text" id="name" name="name" placeholder="För- och efternamn" required aria-required="true" autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Telefonnummer <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="070-123 45 67" required aria-required="true" autocomplete="tel" inputmode="tel">
+        </div>
+
+        <div class="form-group">
+          <label for="email">E-postadress <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <input type="email" id="email" name="email" placeholder="namn@exempel.se" required aria-required="true" autocomplete="email" aria-errormessage="email-error">
+          <div id="email-error" class="error-message" style="display:none;" aria-live="polite">Vänligen ange en giltig e-postadress</div>
+        </div>
+
+        <div class="form-group">
+          <label for="city">Ort <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <input type="text" id="city" name="city" placeholder="Ort" required aria-required="true" autocomplete="address-level2">
+        </div>
+
+        <div class="form-group">
+          <label for="address">Adress <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <input type="text" id="address" name="address" placeholder="Gatuadress" required aria-required="true" autocomplete="street-address">
+        </div>
+
+        <div class="form-group">
+          <label for="postalcode">Postnummer <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <input type="text" id="postalcode" name="postalcode" placeholder="123 45" required aria-required="true" autocomplete="postal-code" inputmode="numeric">
+        </div>
+
+        <div class="terms-section">
+          <p><strong>Information och villkor:</strong></p>
+          <p style="margin-top: 8px;"><a href="Information och Villkor.docx" download>📄 Ladda ner Information och Villkor.docx</a></p>
+
+          <p style="margin-top: 14px;">Jag har läst igenom information och villkor och godkänner dessa.</p>
+          <p style="margin-top: 10px; color: rgba(255,255,255,0.9);">
+            <strong>Regler för avbokning:</strong>
+            Avbokning kan ske utan kostnad fram till tio dagar innan första kurstillfället.
+            Från tio till tre dagar innan betalas halva kursavgiften.
+            Vid avbokning mindre än tre dagar innan ska hela kursavgiften betalas.
+          </p>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="terms-accepted" name="terms-accepted" required aria-required="true">
+            <label for="terms-accepted">Jag har läst villkoren och godkänner dessa <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          </div>
+        </div>
+
+        <button type="button" class="btn" id="submit-btn" onclick="submitRegistration()" disabled style="margin-top: 18px; width: 100%;">Skicka anmälan</button>
+      </div>
+    </div>
+
+    <div id="resor" class="page">
+      <h2 style="color: #ffffff; margin-bottom: 30px; font-size: 36px;">Klätterresor</h2>
+
+      <div class="card">
+        <h3>🇬🇷 Kalymnos, Grekland - Intresseanmälan</h3>
+        <p>Upplev klätterparadiset Kalymnos! En fantastisk resa med hundratals välsäkrade sportklättringleder med havsutsikt. Denna resa passar både erfarna klättrare och nybörjare som vill utvecklas.</p>
+
+        <p style="margin-top: 20px;"><strong>Vem passar resan för?</strong></p>
+        <p>Resan är öppen för alla nivåer, men det är bra om du kan klättra minst svårighetsgrad 5a. Under resan får du möjlighet att:</p>
+        <ul style="margin-left: 20px; margin-top: 10px;">
+          <li>Ta rött kort (certifiering för sportklättring)</li>
+          <li>Lära dig sportklättring om du inte redan kan det</li>
+          <li>Utveckla din teknik i perfekta klätterförhållanden</li>
+          <li>Klättra på över 3000 rutter i alla svårighetsgrader</li>
+        </ul>
+
+        <div class="kalymnos-hero3">
+          <img src="_DSC0603_1.jpg" alt="Kalymnos klättring" loading="lazy">
+          <img src="_DSC0664.jpg" alt="Kalymnos vy" loading="lazy">
+          <img src="GOPR3991_1.jpg" alt="Kalymnos grupp" loading="lazy">
+        </div>
+
+        <p><strong>Period:</strong> April-Maj &amp; September-Oktober</p>
+        <p><strong>Pris:</strong> Från 10 000 kr (inkluderar boende, viss utrustning och instruktion)</p>
+
+        <p style="margin-top: 20px;"><strong>Intresserad?</strong></p>
+        <p>Fyll i dina uppgifter nedan så kontaktar vi dig med mer information om kommande resor till Kalymnos!</p>
+
+        <button type="button" class="btn" onclick="showInterestForm()" style="margin-top: 16px;">Anmäl intresse</button>
+
+        <div class="kalymnos-mosaic">
+          <div class="shot big feature"><img src="GOPR3776_1.jpg" alt="Bad i kristallklart vatten" loading="lazy"></div>
+          <div class="shot big feature"><img src="_DSC0756_1.jpg" alt="Utsikt över Kalymnos" loading="lazy"></div>
+
+          <div class="shot medium"><img src="_DSC0707_1.jpg" alt="Scooter och solnedgång" loading="lazy"></div>
+          <div class="shot medium"><img src="_DSC0616_2.jpg" alt="Klättring på kalk" loading="lazy"></div>
+          <div class="shot medium"><img src="_DSC0649_2.jpg" alt="Klättring med havsutsikt" loading="lazy"></div>
+
+          <div class="shot small"><img src="_DSC0606_1.jpg" alt="Utrustning och förberedelser" loading="lazy"></div>
+          <div class="shot small"><img src="_DSC0720_1.jpg" alt="Flyt i havet" loading="lazy"></div>
+          <div class="shot small"><img src="_DSC0750_1.jpg" alt="Gänget på resa" loading="lazy"></div>
+          <div class="shot small"><img src="_DSC0711_1.jpg" alt="Kvällsljus och vy" loading="lazy"></div>
+
+          <div class="shot tiny"><img src="_DSC0661_1.jpg" alt="Klättring på väggen" loading="lazy"></div>
+          <div class="shot tiny"><img src="_DSC0627_2.jpg" alt="Klättring i solen" loading="lazy"></div>
+          <div class="shot tiny"><img src="_DSC0729_1.jpg" alt="Café i gränd" loading="lazy"></div>
+          <div class="shot tiny"><img src="_DSC0732_1.jpg" alt="Häng i gränden" loading="lazy"></div>
+          <div class="shot tiny"><img src="_DSC0740_1.jpg" alt="Skratt vid bordet" loading="lazy"></div>
+          <div class="shot tiny"><img src="_DSC0737_1.jpg" alt="Stämning i stan" loading="lazy"></div>
+          <div class="shot tiny"><img src="GOPR3769_1.jpg" alt="Sol och bad" loading="lazy"></div>
+          <div class="shot tiny"><img src="_DSC0608_1.jpg" alt="Vy över öarna" loading="lazy"></div>
+          <div class="shot tiny"><img src="_DSC0609_1.jpg" alt="Klippa och hav" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="interest-form" class="page">
+      <button type="button" class="btn back-btn" onclick="showPage('resor')">← Tillbaka till resor</button>
+      <h2 style="color: #ffffff; margin: 18px 0 20px; font-size: 36px;">Intresseanmälan - Kalymnos</h2>
+
+      <div class="card">
+        <h3>Anmäl ditt intresse för Kalymnos-resan</h3>
+
+        <div id="interest-status" class="sr-only" aria-live="polite"></div>
+
+        <div class="form-group">
+          <label for="interest-name">Namn <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <input type="text" id="interest-name" name="interest-name" placeholder="För- och efternamn" required aria-required="true" autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="interest-phone">Telefonnummer <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <input type="tel" id="interest-phone" name="interest-phone" placeholder="070-123 45 67" required aria-required="true" autocomplete="tel" inputmode="tel">
+        </div>
+
+        <div class="form-group">
+          <label for="interest-email">E-postadress <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <input type="email" id="interest-email" name="interest-email" placeholder="namn@exempel.se" required aria-required="true" autocomplete="email" aria-errormessage="interest-email-error">
+          <div id="interest-email-error" class="error-message" style="display:none;" aria-live="polite">Vänligen ange en giltig e-postadress</div>
+        </div>
+
+        <div class="form-group">
+          <label for="interest-period">Vilken period föredrar du? <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <select id="interest-period" name="interest-period" required aria-required="true">
+            <option value="">Välj period</option>
+            <option value="april-maj">April-Maj</option>
+            <option value="september-oktober">September-Oktober</option>
+            <option value="flexibel">Flexibel</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="interest-experience">Din klättererfarenhet <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
+          <select id="interest-experience" name="interest-experience" required aria-required="true">
+            <option value="">Välj erfarenhetsnivå</option>
+            <option value="nybörjare">Nybörjare (klättrat mindre än 1 år)</option>
+            <option value="medel">Medel (1-3 år, klarar 5a-6a)</option>
+            <option value="erfaren">Erfaren (3+ år, klarar 6b+)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="interest-message">Övrig information eller frågor</label>
+          <textarea id="interest-message" name="interest-message" rows="4" placeholder="Skriv gärna om önskemål, frågor eller erfarenhet..."></textarea>
+        </div>
+
+        <button type="button" class="btn" id="interest-submit-btn" onclick="submitInterest()" disabled style="margin-top: 18px; width: 100%;">Skicka intresseanmälan</button>
+      </div>
+    </div>
+
+    <div id="om-oss" class="page">
+      <h2 style="color: #ffffff; margin-bottom: 30px; font-size: 36px;">Om oss</h2>
+
+      <div class="card">
+        <h3>Historia</h3>
+        <p>Klätterföretaget grundades 2015 för att jag ville dela min kärlek till sporten. Sedan dess har jag genomfört ett stort antal kurser med många nöjda kunder både inom- och utomhus.</p>
+      </div>
+
+      <div class="card">
+        <h3>Filosofi</h3>
+        <p>Jag tror på att klättring är för alla. Oavsett ålder, erfarenhet eller fysisk förmåga kan du hitta glädje i klättring. Säkerhet, gemenskap och upplevelser är våra kärnvärden.</p>
+      </div>
+
+      <div class="card">
+        <h3>Om mig</h3>
+        <p>Jag är certifierad klätterinstruktör med gedigen erfarenhet från både svenska och internationella klätterställen. Klättring är min stora passion, som jag gärna för vidare till dig.</p>
+      </div>
+
+      <div class="card">
+        <h3>Kontakta oss</h3>
+        <p>📧 borgande@gmail.com<br>
+          📞 073-778 22 97<br>
+          📍 Grytängsvägen 4, Örebro</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Lightbox-overlay -->
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Bildvisare">
+    <button class="close" type="button" aria-label="Stäng (Esc)">✕</button>
+    <img id="lightbox-img" alt="">
+  </div>
+
+<script>
+let selectedCourseData = {};
+
+function closeMobileMenuIfOpen(){
+  const sidebar = document.querySelector('.sidebar');
+  const toggle = document.querySelector('.menu-toggle');
+  if (!sidebar || !toggle) return;
+
+  if (window.matchMedia('(max-width: 768px)').matches) {
+    sidebar.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+}
+
+function showPage(pageId) {
+  const pages = document.querySelectorAll('.page');
+  const links = document.querySelectorAll('.menu a');
+
+  pages.forEach(page => page.classList.remove('active'));
+  links.forEach(link => link.classList.remove('active'));
+
+  const page = document.getElementById(pageId);
+  page.classList.add('active');
+
+  const activeLink = document.querySelector(`.menu a[href="#${pageId}"]`);
+  if (activeLink) activeLink.classList.add('active');
+
+  closeMobileMenuIfOpen();
+
+  // Flytta fokus till huvudytan för bättre tangentbordsnavigering
+  const main = document.getElementById('main-content');
+  if (main) main.focus({ preventScroll: true });
+}
+
+function showToprepsDates() {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.classList.remove('active'));
+  document.getElementById('topreps-dates').classList.add('active');
+
+  closeMobileMenuIfOpen();
+
+  const main = document.getElementById('main-content');
+  if (main) main.focus({ preventScroll: true });
+}
+
+function showInterestForm() {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.classList.remove('active'));
+  document.getElementById('interest-form').classList.add('active');
+
+  closeMobileMenuIfOpen();
+
+  // Reset form
+  document.querySelectorAll('#interest-form input, #interest-form select, #interest-form textarea').forEach(input => {
+    input.value = '';
+    input.classList.remove('error');
+    input.removeAttribute('aria-invalid');
+  });
+  document.getElementById('interest-email-error').style.display = 'none';
+  updateInterestSubmitButton();
+
+  const main = document.getElementById('main-content');
+  if (main) main.focus({ preventScroll: true });
+}
+
+function showRegistrationForm(date, time, price) {
+  selectedCourseData = { date, time, price };
+
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => page.classList.remove('active'));
+  document.getElementById('registration-form').classList.add('active');
+
+  closeMobileMenuIfOpen();
+
+  document.getElementById('selected-course-info').textContent =
+    `Topprepsklättring inomhus - ${date}, ${time} (${price} kr)`;
+
+  // Reset form (endast registration-form inputs/textarea/select)
+  document.querySelectorAll('#registration-form input, #registration-form select, #registration-form textarea').forEach(input => {
+    if (input.type !== 'checkbox') input.value = '';
+    input.classList.remove('error');
+    input.removeAttribute('aria-invalid');
+  });
+  document.getElementById('terms-accepted').checked = false;
+  document.getElementById('email-error').style.display = 'none';
+  document.getElementById('registration-status').textContent = '';
+  updateSubmitButton();
+
+  const main = document.getElementById('main-content');
+  if (main) main.focus({ preventScroll: true });
+}
+
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
+function setFieldError(inputEl, errorEl, show, message) {
+  if (!inputEl || !errorEl) return;
+  if (show) {
+    inputEl.classList.add('error');
+    inputEl.setAttribute('aria-invalid', 'true');
+    errorEl.style.display = 'block';
+    if (message) errorEl.textContent = message;
+  } else {
+    inputEl.classList.remove('error');
+    inputEl.removeAttribute('aria-invalid');
+    errorEl.style.display = 'none';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Mobil hamburger
+  const sidebar = document.querySelector('.sidebar');
+  const toggle = document.querySelector('.menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  if (toggle && sidebar && mobileMenu) {
+    toggle.addEventListener('click', () => {
+      const open = sidebar.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  // Registration form validation
+  const emailInput = document.getElementById('email');
+  const termsCheckbox = document.getElementById('terms-accepted');
+  const emailError = document.getElementById('email-error');
+
+  if (emailInput) {
+    emailInput.addEventListener('blur', function() {
+      const email = this.value.trim();
+      const invalid = !!email && !validateEmail(email);
+      setFieldError(emailInput, emailError, invalid, 'Vänligen ange en giltig e-postadress');
+      updateSubmitButton();
+    });
+  }
+
+  if (termsCheckbox) termsCheckbox.addEventListener('change', updateSubmitButton);
+
+  ['name', 'phone', 'email', 'city', 'address', 'postalcode'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener('input', updateSubmitButton);
+  });
+
+  // Interest form validation
+  const interestEmailInput = document.getElementById('interest-email');
+  const interestEmailError = document.getElementById('interest-email-error');
+
+  if (interestEmailInput) {
+    interestEmailInput.addEventListener('blur', function() {
+      const email = this.value.trim();
+      const invalid = !!email && !validateEmail(email);
+      setFieldError(interestEmailInput, interestEmailError, invalid, 'Vänligen ange en giltig e-postadress');
+      updateInterestSubmitButton();
+    });
+  }
+
+  ['interest-name', 'interest-phone', 'interest-email', 'interest-period', 'interest-experience'].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', updateInterestSubmitButton);
+    el.addEventListener('change', updateInterestSubmitButton);
+  });
+
+  // Lightbox (för både 3-bilder och mosaik)
+  const clickableImages = document.querySelectorAll('.kalymnos-mosaic img, .kalymnos-hero3 img');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const closeBtn = lightbox.querySelector('.close');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus({ preventScroll: true });
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  // Gör bilder tangentbordsfokuserbara och öppningsbara med Enter/Space
+  clickableImages.forEach(img => {
+    img.setAttribute('tabindex', '0');
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', (img.alt ? `Öppna bild: ${img.alt}` : 'Öppna bild'));
+    img.addEventListener('click', () => openLightbox(img.src, img.alt));
+    img.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openLightbox(img.src, img.alt);
+      }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
+  });
+});
+
+function updateInterestSubmitButton() {
+  const name = document.getElementById('interest-name')?.value.trim();
+  const phone = document.getElementById('interest-phone')?.value.trim();
+  const email = document.getElementById('interest-email')?.value.trim();
+  const period = document.getElementById('interest-period')?.value;
+  const experience = document.getElementById('interest-experience')?.value;
+
+  const allFieldsFilled = name && phone && email && period && experience;
+  const emailValid = validateEmail(email || '');
+
+  const submitBtn = document.getElementById('interest-submit-btn');
+  if (submitBtn) submitBtn.disabled = !(allFieldsFilled && emailValid);
+}
+
+function submitInterest() {
+  const emailEl = document.getElementById('interest-email');
+  const errEl = document.getElementById('interest-email-error');
+
+  if (emailEl && emailEl.value.trim() && !validateEmail(emailEl.value.trim())) {
+    setFieldError(emailEl, errEl, true, 'Vänligen ange en giltig e-postadress');
+    document.getElementById('interest-status').textContent = 'Fel: E-postadressen är inte giltig.';
+    emailEl.focus();
+    return;
+  }
+
+  const formData = {
+    namn: document.getElementById('interest-name').value,
+    telefon: document.getElementById('interest-phone').value,
+    email: document.getElementById('interest-email').value,
+    period: document.getElementById('interest-period').value,
+    erfarenhet: document.getElementById('interest-experience').value,
+    meddelande: document.getElementById('interest-message').value
+  };
+
+  console.log('Intresseanmälan skickad:', formData);
+  console.log('E-post skulle skickas till:', formData.email);
+  console.log('Kopia skulle skickas till: borgande@gmail.com');
+
+  alert(`Tack för din intresseanmälan!\n\nVi har mottagit ditt intresse för Kalymnos-resan och kommer att kontakta dig på ${formData.email} med mer information.\n\nVi ses på klipporna!`);
+  showPage('resor');
+}
+
+function updateSubmitButton() {
+  const name = document.getElementById('name')?.value.trim();
+  const phone = document.getElementById('phone')?.value.trim();
+  const email = document.getElementById('email')?.value.trim();
+  const city = document.getElementById('city')?.value.trim();
+  const address = document.getElementById('address')?.value.trim();
+  const postalcode = document.getElementById('postalcode')?.value.trim();
+  const termsAccepted = document.getElementById('terms-accepted')?.checked;
+
+  const allFieldsFilled = name && phone && email && city && address && postalcode;
+  const emailValid = validateEmail(email || '');
+
+  const submitBtn = document.getElementById('submit-btn');
+  if (submitBtn) submitBtn.disabled = !(allFieldsFilled && emailValid && termsAccepted);
+}
+
+function submitRegistration() {
+  const emailEl = document.getElementById('email');
+  const errEl = document.getElementById('email-error');
+
+  if (emailEl && emailEl.value.trim() && !validateEmail(emailEl.value.trim())) {
+    setFieldError(emailEl, errEl, true, 'Vänligen ange en giltig e-postadress');
+    document.getElementById('registration-status').textContent = 'Fel: E-postadressen är inte giltig.';
+    emailEl.focus();
+    return;
+  }
+
+  const formData = {
+    namn: document.getElementById('name').value,
+    telefon: document.getElementById('phone').value,
+    email: document.getElementById('email').value,
+    ort: document.getElementById('city').value,
+    adress: document.getElementById('address').value,
+    postnummer: document.getElementById('postalcode').value,
+    kurs: selectedCourseData.date,
+    tid: selectedCourseData.time,
+    pris: selectedCourseData.price
+  };
+
+  console.log('Anmälan skickad:', formData);
+  console.log('E-post skulle skickas till:', formData.email);
+  console.log('Kopia skulle skickas till: borgande@gmail.com');
+
+  alert(`Välkommen på kurs!\n\nDu är nu anmäld till Topprepsklättring inomhus:\nDatum: ${selectedCourseData.date}\nTid: ${selectedCourseData.time}\nPris: ${selectedCourseData.price} kr\n\nEn bekräftelse har skickats till ${formData.email}`);
+  showPage('kurser');
+}
+</script>
+</body>
+</html>
