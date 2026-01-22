@@ -469,7 +469,6 @@ textarea.error{
   <nav class="sidebar" role="navigation" aria-label="Huvudmeny">
     <div class="logo">
       <h1>🧗 Klätterföretaget</h1>
-      <!-- Mobil hamburger -->
       <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu">☰ Meny</button>
     </div>
 
@@ -591,12 +590,25 @@ textarea.error{
 
         <div class="form-group">
           <label for="name">Namn <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
-          <input type="text" id="name" name="name" placeholder="För- och efternamn" required aria-required="true" autocomplete="name">
+          <input type="text" id="name" name="name" placeholder="För- och efternamn" required aria-required="true" autocomplete="name" aria-errormessage="name-error">
+          <div id="name-error" class="error-message" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div class="form-group">
           <label for="phone">Telefonnummer <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
-          <input type="tel" id="phone" name="phone" placeholder="070-123 45 67" required aria-required="true" autocomplete="tel" inputmode="tel">
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="073-123 45 67"
+            required
+            aria-required="true"
+            autocomplete="tel"
+            inputmode="tel"
+            pattern="^[0-9+() -]{7,}$"
+            aria-errormessage="phone-error"
+          >
+          <div id="phone-error" class="error-message" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div class="form-group">
@@ -607,17 +619,31 @@ textarea.error{
 
         <div class="form-group">
           <label for="city">Ort <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
-          <input type="text" id="city" name="city" placeholder="Ort" required aria-required="true" autocomplete="address-level2">
+          <input type="text" id="city" name="city" placeholder="Ort" required aria-required="true" autocomplete="address-level2" aria-errormessage="city-error">
+          <div id="city-error" class="error-message" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div class="form-group">
           <label for="address">Adress <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
-          <input type="text" id="address" name="address" placeholder="Gatuadress" required aria-required="true" autocomplete="street-address">
+          <input type="text" id="address" name="address" placeholder="Gatuadress" required aria-required="true" autocomplete="street-address" aria-errormessage="address-error">
+          <div id="address-error" class="error-message" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div class="form-group">
           <label for="postalcode">Postnummer <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
-          <input type="text" id="postalcode" name="postalcode" placeholder="123 45" required aria-required="true" autocomplete="postal-code" inputmode="numeric">
+          <input
+            type="text"
+            id="postalcode"
+            name="postalcode"
+            placeholder="123 45"
+            required
+            aria-required="true"
+            autocomplete="postal-code"
+            inputmode="numeric"
+            pattern="^\\d{3}\\s?\\d{2}$"
+            aria-errormessage="postalcode-error"
+          >
+          <div id="postalcode-error" class="error-message" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div class="terms-section">
@@ -709,12 +735,25 @@ textarea.error{
 
         <div class="form-group">
           <label for="interest-name">Namn <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
-          <input type="text" id="interest-name" name="interest-name" placeholder="För- och efternamn" required aria-required="true" autocomplete="name">
+          <input type="text" id="interest-name" name="interest-name" placeholder="För- och efternamn" required aria-required="true" autocomplete="name" aria-errormessage="interest-name-error">
+          <div id="interest-name-error" class="error-message" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div class="form-group">
           <label for="interest-phone">Telefonnummer <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
-          <input type="tel" id="interest-phone" name="interest-phone" placeholder="070-123 45 67" required aria-required="true" autocomplete="tel" inputmode="tel">
+          <input
+            type="tel"
+            id="interest-phone"
+            name="interest-phone"
+            placeholder="073-123 45 67"
+            required
+            aria-required="true"
+            autocomplete="tel"
+            inputmode="tel"
+            pattern="^[0-9+() -]{7,}$"
+            aria-errormessage="interest-phone-error"
+          >
+          <div id="interest-phone-error" class="error-message" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div class="form-group">
@@ -725,22 +764,24 @@ textarea.error{
 
         <div class="form-group">
           <label for="interest-period">Vilken period föredrar du? <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
-          <select id="interest-period" name="interest-period" required aria-required="true">
+          <select id="interest-period" name="interest-period" required aria-required="true" aria-errormessage="interest-period-error">
             <option value="">Välj period</option>
             <option value="april-maj">April-Maj</option>
             <option value="september-oktober">September-Oktober</option>
             <option value="flexibel">Flexibel</option>
           </select>
+          <div id="interest-period-error" class="error-message" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div class="form-group">
           <label for="interest-experience">Din klättererfarenhet <span aria-hidden="true">*</span> <span class="sr-only">(obligatoriskt)</span></label>
-          <select id="interest-experience" name="interest-experience" required aria-required="true">
+          <select id="interest-experience" name="interest-experience" required aria-required="true" aria-errormessage="interest-experience-error">
             <option value="">Välj erfarenhetsnivå</option>
             <option value="nybörjare">Nybörjare (klättrat mindre än 1 år)</option>
             <option value="medel">Medel (1-3 år, klarar 5a-6a)</option>
             <option value="erfaren">Erfaren (3+ år, klarar 6b+)</option>
           </select>
+          <div id="interest-experience-error" class="error-message" style="display:none;" aria-live="polite"></div>
         </div>
 
         <div class="form-group">
@@ -788,6 +829,12 @@ textarea.error{
 <script>
 let selectedCourseData = {};
 
+/* ========= API ========= */
+const API_BASE = ""; // samma domän
+const API_REGISTER = `${API_BASE}/api/register`;
+const API_INTEREST  = `${API_BASE}/api/interest`;
+
+/* ========= Mobilmeny ========= */
 function closeMobileMenuIfOpen(){
   const sidebar = document.querySelector('.sidebar');
   const toggle = document.querySelector('.menu-toggle');
@@ -799,6 +846,188 @@ function closeMobileMenuIfOpen(){
   }
 }
 
+/* ========= Validering (helpers) ========= */
+function countDigits(str){
+  return (String(str).match(/\d/g) || []).length;
+}
+
+function validateEmailValue(email){
+  const v = (email || '').trim();
+  if (!v) return { ok:false, msg:'Ange e-postadress.' };
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!re.test(v)) return { ok:false, msg:'Vänligen ange en giltig e-postadress.' };
+  return { ok:true, msg:'' };
+}
+
+function validatePhone(value){
+  const v = (value || '').trim();
+  if (!v) return { ok:false, msg:'Ange telefonnummer.' };
+
+  if (!/^[0-9+() -]+$/.test(v)) {
+    return { ok:false, msg:'Telefonnumret får bara innehålla siffror, mellanslag, bindestreck, parenteser och +.' };
+  }
+
+  const digits = countDigits(v);
+  if (digits < 7 || digits > 15) {
+    return { ok:false, msg:'Ange ett giltigt telefonnummer (7–15 siffror), t.ex. 073-123 45 67 eller +46 73 123 45 67.' };
+  }
+
+  if (v.includes('+') && !v.startsWith('+')) {
+    return { ok:false, msg:'Om du använder +, placera det först (t.ex. +46 70...).'};
+  }
+
+  return { ok:true, msg:'' };
+}
+
+function validatePostalCode(value){
+  const v = (value || '').trim();
+  if (!v) return { ok:false, msg:'Ange postnummer.' };
+  if (!/^\d{3}\s?\d{2}$/.test(v)) {
+    return { ok:false, msg:'Ange postnummer i formatet 123 45 eller 12345.' };
+  }
+  return { ok:true, msg:'' };
+}
+
+function validateMinLength(value, min, msg){
+  const v = (value || '').trim();
+  if (v.length < min) return { ok:false, msg };
+  return { ok:true, msg:'' };
+}
+
+function validateSelectRequired(value, msg){
+  if (!value) return { ok:false, msg };
+  return { ok:true, msg:'' };
+}
+
+function formatSwedishPostalCode(value){
+  const digits = (value || '').replace(/\D/g, '').slice(0,5);
+  if (digits.length <= 3) return digits;
+  return digits.slice(0,3) + ' ' + digits.slice(3);
+}
+
+function applyValidation(el, errorEl, result){
+  if (!el || !errorEl) return;
+  if (!result.ok) {
+    el.classList.add('error');
+    el.setAttribute('aria-invalid', 'true');
+    errorEl.style.display = 'block';
+    errorEl.textContent = result.msg;
+    if (typeof el.setCustomValidity === 'function') el.setCustomValidity(result.msg);
+  } else {
+    el.classList.remove('error');
+    el.removeAttribute('aria-invalid');
+    errorEl.style.display = 'none';
+    errorEl.textContent = '';
+    if (typeof el.setCustomValidity === 'function') el.setCustomValidity('');
+  }
+}
+
+/* Blur-only: på input gömmer vi fel, men visar inte nya förrän blur */
+function clearFieldError(el, errorEl){
+  if (!el || !errorEl) return;
+  el.classList.remove('error');
+  el.removeAttribute('aria-invalid');
+  errorEl.style.display = 'none';
+  errorEl.textContent = '';
+  if (typeof el.setCustomValidity === 'function') el.setCustomValidity('');
+}
+
+/* ========= Validera “allt” vid submit ========= */
+function validateRegistrationAll(){
+  const nameEl = document.getElementById('name');
+  const phoneEl = document.getElementById('phone');
+  const emailEl = document.getElementById('email');
+  const cityEl = document.getElementById('city');
+  const addrEl = document.getElementById('address');
+  const postEl = document.getElementById('postalcode');
+  const termsEl = document.getElementById('terms-accepted');
+
+  const checks = [
+    { el: nameEl,  err: document.getElementById('name-error'),       res: validateMinLength(nameEl?.value, 2, 'Ange för- och efternamn (minst 2 tecken).') },
+    { el: phoneEl, err: document.getElementById('phone-error'),      res: validatePhone(phoneEl?.value) },
+    { el: emailEl, err: document.getElementById('email-error'),      res: validateEmailValue(emailEl?.value) },
+    { el: cityEl,  err: document.getElementById('city-error'),       res: validateMinLength(cityEl?.value, 2, 'Ange ort (minst 2 tecken).') },
+    { el: addrEl,  err: document.getElementById('address-error'),    res: validateMinLength(addrEl?.value, 4, 'Ange adress (minst 4 tecken).') },
+    { el: postEl,  err: document.getElementById('postalcode-error'), res: validatePostalCode(postEl?.value) }
+  ];
+
+  let firstInvalid = null;
+  checks.forEach(c => {
+    applyValidation(c.el, c.err, c.res);
+    if (!c.res.ok && !firstInvalid) firstInvalid = c.el;
+  });
+
+  if (termsEl && !termsEl.checked && !firstInvalid) firstInvalid = termsEl;
+  return firstInvalid;
+}
+
+function validateInterestAll(){
+  const nameEl = document.getElementById('interest-name');
+  const phoneEl = document.getElementById('interest-phone');
+  const emailEl = document.getElementById('interest-email');
+  const periodEl = document.getElementById('interest-period');
+  const expEl = document.getElementById('interest-experience');
+
+  const checks = [
+    { el: nameEl,  err: document.getElementById('interest-name-error'),       res: validateMinLength(nameEl?.value, 2, 'Ange för- och efternamn (minst 2 tecken).') },
+    { el: phoneEl, err: document.getElementById('interest-phone-error'),      res: validatePhone(phoneEl?.value) },
+    { el: emailEl, err: document.getElementById('interest-email-error'),      res: validateEmailValue(emailEl?.value) },
+    { el: periodEl,err: document.getElementById('interest-period-error'),     res: validateSelectRequired(periodEl?.value, 'Välj en period.') },
+    { el: expEl,   err: document.getElementById('interest-experience-error'), res: validateSelectRequired(expEl?.value, 'Välj erfarenhetsnivå.') }
+  ];
+
+  let firstInvalid = null;
+  checks.forEach(c => {
+    applyValidation(c.el, c.err, c.res);
+    if (!c.res.ok && !firstInvalid) firstInvalid = c.el;
+  });
+
+  return firstInvalid;
+}
+
+/* ========= Enable/Disable knappar (utan att visa fel) ========= */
+function updateInterestSubmitButton() {
+  const name = document.getElementById('interest-name')?.value.trim();
+  const phone = document.getElementById('interest-phone')?.value.trim();
+  const email = document.getElementById('interest-email')?.value.trim();
+  const period = document.getElementById('interest-period')?.value;
+  const experience = document.getElementById('interest-experience')?.value;
+
+  const allFieldsFilled = name && phone && email && period && experience;
+
+  const nameOk = validateMinLength(name, 2, '').ok;
+  const phoneOk = validatePhone(phone).ok;
+  const emailOk = validateEmailValue(email).ok;
+  const periodOk = validateSelectRequired(period, '').ok;
+  const expOk = validateSelectRequired(experience, '').ok;
+
+  const submitBtn = document.getElementById('interest-submit-btn');
+  if (submitBtn) submitBtn.disabled = !(allFieldsFilled && nameOk && phoneOk && emailOk && periodOk && expOk);
+}
+
+function updateSubmitButton() {
+  const name = document.getElementById('name')?.value.trim();
+  const phone = document.getElementById('phone')?.value.trim();
+  const email = document.getElementById('email')?.value.trim();
+  const city = document.getElementById('city')?.value.trim();
+  const address = document.getElementById('address')?.value.trim();
+  const postalcode = document.getElementById('postalcode')?.value.trim();
+  const termsAccepted = document.getElementById('terms-accepted')?.checked;
+
+  const allFieldsFilled = name && phone && email && city && address && postalcode;
+
+  const nameOk = validateMinLength(name, 2, '').ok;
+  const phoneOk = validatePhone(phone).ok;
+  const emailOk = validateEmailValue(email).ok;
+  const cityOk = validateMinLength(city, 2, '').ok;
+  const addressOk = validateMinLength(address, 4, '').ok;
+  const postalOk = validatePostalCode(postalcode).ok;
+
+  const submitBtn = document.getElementById('submit-btn');
+  if (submitBtn) submitBtn.disabled = !(allFieldsFilled && termsAccepted && nameOk && phoneOk && emailOk && cityOk && addressOk && postalOk);
+}
+
+/* ========= Navigation ========= */
 function showPage(pageId) {
   const pages = document.querySelectorAll('.page');
   const links = document.querySelectorAll('.menu a');
@@ -814,7 +1043,6 @@ function showPage(pageId) {
 
   closeMobileMenuIfOpen();
 
-  // Flytta fokus till huvudytan för bättre tangentbordsnavigering
   const main = document.getElementById('main-content');
   if (main) main.focus({ preventScroll: true });
 }
@@ -837,13 +1065,19 @@ function showInterestForm() {
 
   closeMobileMenuIfOpen();
 
-  // Reset form
   document.querySelectorAll('#interest-form input, #interest-form select, #interest-form textarea').forEach(input => {
     input.value = '';
     input.classList.remove('error');
     input.removeAttribute('aria-invalid');
+    if (typeof input.setCustomValidity === 'function') input.setCustomValidity('');
   });
-  document.getElementById('interest-email-error').style.display = 'none';
+
+  ['interest-name-error','interest-phone-error','interest-email-error','interest-period-error','interest-experience-error']
+    .forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.style.display = 'none'; el.textContent = ''; }
+    });
+
   updateInterestSubmitButton();
 
   const main = document.getElementById('main-content');
@@ -862,14 +1096,20 @@ function showRegistrationForm(date, time, price) {
   document.getElementById('selected-course-info').textContent =
     `Topprepsklättring inomhus - ${date}, ${time} (${price} kr)`;
 
-  // Reset form (endast registration-form inputs/textarea/select)
   document.querySelectorAll('#registration-form input, #registration-form select, #registration-form textarea').forEach(input => {
     if (input.type !== 'checkbox') input.value = '';
     input.classList.remove('error');
     input.removeAttribute('aria-invalid');
+    if (typeof input.setCustomValidity === 'function') input.setCustomValidity('');
   });
   document.getElementById('terms-accepted').checked = false;
-  document.getElementById('email-error').style.display = 'none';
+
+  ['name-error','phone-error','email-error','city-error','address-error','postalcode-error']
+    .forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.style.display = 'none'; el.textContent = (id === 'email-error') ? 'Vänligen ange en giltig e-postadress' : ''; }
+    });
+
   document.getElementById('registration-status').textContent = '';
   updateSubmitButton();
 
@@ -877,25 +1117,27 @@ function showRegistrationForm(date, time, price) {
   if (main) main.focus({ preventScroll: true });
 }
 
-function validateEmail(email) {
-  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return re.test(email);
-}
+/* ========= Server call helper ========= */
+async function postJSON(url, payload){
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  });
 
-function setFieldError(inputEl, errorEl, show, message) {
-  if (!inputEl || !errorEl) return;
-  if (show) {
-    inputEl.classList.add('error');
-    inputEl.setAttribute('aria-invalid', 'true');
-    errorEl.style.display = 'block';
-    if (message) errorEl.textContent = message;
-  } else {
-    inputEl.classList.remove('error');
-    inputEl.removeAttribute('aria-invalid');
-    errorEl.style.display = 'none';
+  const text = await res.text();
+  let data;
+  try { data = text ? JSON.parse(text) : {}; }
+  catch { data = { message: text }; }
+
+  if (!res.ok) {
+    const msg = data?.message || 'Något gick fel vid skickning. Försök igen.';
+    throw new Error(msg);
   }
+  return data;
 }
 
+/* ========= DOMContentLoaded: blur-only listeners ========= */
 document.addEventListener('DOMContentLoaded', function() {
   // Mobil hamburger
   const sidebar = document.querySelector('.sidebar');
@@ -909,48 +1151,85 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Registration form validation
-  const emailInput = document.getElementById('email');
-  const termsCheckbox = document.getElementById('terms-accepted');
-  const emailError = document.getElementById('email-error');
+  // Registration blur-only
+  const nameEl = document.getElementById('name');
+  const phoneEl = document.getElementById('phone');
+  const emailEl = document.getElementById('email');
+  const cityEl = document.getElementById('city');
+  const addrEl = document.getElementById('address');
+  const postEl = document.getElementById('postalcode');
+  const termsEl = document.getElementById('terms-accepted');
 
-  if (emailInput) {
-    emailInput.addEventListener('blur', function() {
-      const email = this.value.trim();
-      const invalid = !!email && !validateEmail(email);
-      setFieldError(emailInput, emailError, invalid, 'Vänligen ange en giltig e-postadress');
+  if (nameEl){
+    const err = document.getElementById('name-error');
+    nameEl.addEventListener('input', () => { clearFieldError(nameEl, err); updateSubmitButton(); });
+    nameEl.addEventListener('blur',  () => { applyValidation(nameEl, err, validateMinLength(nameEl.value, 2, 'Ange för- och efternamn (minst 2 tecken).')); updateSubmitButton(); });
+  }
+  if (phoneEl){
+    const err = document.getElementById('phone-error');
+    phoneEl.addEventListener('input', () => { clearFieldError(phoneEl, err); updateSubmitButton(); });
+    phoneEl.addEventListener('blur',  () => { applyValidation(phoneEl, err, validatePhone(phoneEl.value)); updateSubmitButton(); });
+  }
+  if (emailEl){
+    const err = document.getElementById('email-error');
+    emailEl.addEventListener('input', () => { clearFieldError(emailEl, err); updateSubmitButton(); });
+    emailEl.addEventListener('blur',  () => { applyValidation(emailEl, err, validateEmailValue(emailEl.value)); updateSubmitButton(); });
+  }
+  if (cityEl){
+    const err = document.getElementById('city-error');
+    cityEl.addEventListener('input', () => { clearFieldError(cityEl, err); updateSubmitButton(); });
+    cityEl.addEventListener('blur',  () => { applyValidation(cityEl, err, validateMinLength(cityEl.value, 2, 'Ange ort (minst 2 tecken).')); updateSubmitButton(); });
+  }
+  if (addrEl){
+    const err = document.getElementById('address-error');
+    addrEl.addEventListener('input', () => { clearFieldError(addrEl, err); updateSubmitButton(); });
+    addrEl.addEventListener('blur',  () => { applyValidation(addrEl, err, validateMinLength(addrEl.value, 4, 'Ange adress (minst 4 tecken).')); updateSubmitButton(); });
+  }
+  if (postEl){
+    const err = document.getElementById('postalcode-error');
+    postEl.addEventListener('input', () => {
+      postEl.value = formatSwedishPostalCode(postEl.value);
+      clearFieldError(postEl, err);
       updateSubmitButton();
     });
+    postEl.addEventListener('blur',  () => { applyValidation(postEl, err, validatePostalCode(postEl.value)); updateSubmitButton(); });
+  }
+  if (termsEl) termsEl.addEventListener('change', updateSubmitButton);
+
+  // Interest blur-only
+  const iName = document.getElementById('interest-name');
+  const iPhone = document.getElementById('interest-phone');
+  const iEmail = document.getElementById('interest-email');
+  const iPeriod = document.getElementById('interest-period');
+  const iExp = document.getElementById('interest-experience');
+
+  if (iName){
+    const err = document.getElementById('interest-name-error');
+    iName.addEventListener('input', () => { clearFieldError(iName, err); updateInterestSubmitButton(); });
+    iName.addEventListener('blur',  () => { applyValidation(iName, err, validateMinLength(iName.value, 2, 'Ange för- och efternamn (minst 2 tecken).')); updateInterestSubmitButton(); });
+  }
+  if (iPhone){
+    const err = document.getElementById('interest-phone-error');
+    iPhone.addEventListener('input', () => { clearFieldError(iPhone, err); updateInterestSubmitButton(); });
+    iPhone.addEventListener('blur',  () => { applyValidation(iPhone, err, validatePhone(iPhone.value)); updateInterestSubmitButton(); });
+  }
+  if (iEmail){
+    const err = document.getElementById('interest-email-error');
+    iEmail.addEventListener('input', () => { clearFieldError(iEmail, err); updateInterestSubmitButton(); });
+    iEmail.addEventListener('blur',  () => { applyValidation(iEmail, err, validateEmailValue(iEmail.value)); updateInterestSubmitButton(); });
+  }
+  if (iPeriod){
+    const err = document.getElementById('interest-period-error');
+    iPeriod.addEventListener('change', () => { clearFieldError(iPeriod, err); updateInterestSubmitButton(); });
+    iPeriod.addEventListener('blur',   () => { applyValidation(iPeriod, err, validateSelectRequired(iPeriod.value, 'Välj en period.')); updateInterestSubmitButton(); });
+  }
+  if (iExp){
+    const err = document.getElementById('interest-experience-error');
+    iExp.addEventListener('change', () => { clearFieldError(iExp, err); updateInterestSubmitButton(); });
+    iExp.addEventListener('blur',   () => { applyValidation(iExp, err, validateSelectRequired(iExp.value, 'Välj erfarenhetsnivå.')); updateInterestSubmitButton(); });
   }
 
-  if (termsCheckbox) termsCheckbox.addEventListener('change', updateSubmitButton);
-
-  ['name', 'phone', 'email', 'city', 'address', 'postalcode'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', updateSubmitButton);
-  });
-
-  // Interest form validation
-  const interestEmailInput = document.getElementById('interest-email');
-  const interestEmailError = document.getElementById('interest-email-error');
-
-  if (interestEmailInput) {
-    interestEmailInput.addEventListener('blur', function() {
-      const email = this.value.trim();
-      const invalid = !!email && !validateEmail(email);
-      setFieldError(interestEmailInput, interestEmailError, invalid, 'Vänligen ange en giltig e-postadress');
-      updateInterestSubmitButton();
-    });
-  }
-
-  ['interest-name', 'interest-phone', 'interest-email', 'interest-period', 'interest-experience'].forEach(id => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener('input', updateInterestSubmitButton);
-    el.addEventListener('change', updateInterestSubmitButton);
-  });
-
-  // Lightbox (för både 3-bilder och mosaik)
+  // Lightbox (oförändrad)
   const clickableImages = document.querySelectorAll('.kalymnos-mosaic img, .kalymnos-hero3 img');
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
@@ -972,7 +1251,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.style.overflow = '';
   }
 
-  // Gör bilder tangentbordsfokuserbara och öppningsbara med Enter/Space
   clickableImages.forEach(img => {
     img.setAttribute('tabindex', '0');
     img.setAttribute('role', 'button');
@@ -987,103 +1265,86 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   closeBtn.addEventListener('click', closeLightbox);
-
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox();
-  });
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('open')) closeLightbox(); });
 });
 
-function updateInterestSubmitButton() {
-  const name = document.getElementById('interest-name')?.value.trim();
-  const phone = document.getElementById('interest-phone')?.value.trim();
-  const email = document.getElementById('interest-email')?.value.trim();
-  const period = document.getElementById('interest-period')?.value;
-  const experience = document.getElementById('interest-experience')?.value;
-
-  const allFieldsFilled = name && phone && email && period && experience;
-  const emailValid = validateEmail(email || '');
-
-  const submitBtn = document.getElementById('interest-submit-btn');
-  if (submitBtn) submitBtn.disabled = !(allFieldsFilled && emailValid);
-}
-
-function submitInterest() {
-  const emailEl = document.getElementById('interest-email');
-  const errEl = document.getElementById('interest-email-error');
-
-  if (emailEl && emailEl.value.trim() && !validateEmail(emailEl.value.trim())) {
-    setFieldError(emailEl, errEl, true, 'Vänligen ange en giltig e-postadress');
-    document.getElementById('interest-status').textContent = 'Fel: E-postadressen är inte giltig.';
-    emailEl.focus();
+/* ========= Submit handlers -> server ========= */
+async function submitInterest() {
+  const firstInvalid = validateInterestAll();
+  if (firstInvalid) {
+    document.getElementById('interest-status').textContent = 'Formuläret innehåller fel. Kontrollera markerade fält.';
+    firstInvalid.focus();
     return;
   }
 
-  const formData = {
-    namn: document.getElementById('interest-name').value,
-    telefon: document.getElementById('interest-phone').value,
-    email: document.getElementById('interest-email').value,
+  const payload = {
+    namn: document.getElementById('interest-name').value.trim(),
+    telefon: document.getElementById('interest-phone').value.trim(),
+    email: document.getElementById('interest-email').value.trim(),
     period: document.getElementById('interest-period').value,
     erfarenhet: document.getElementById('interest-experience').value,
-    meddelande: document.getElementById('interest-message').value
+    meddelande: document.getElementById('interest-message').value.trim()
   };
 
-  console.log('Intresseanmälan skickad:', formData);
-  console.log('E-post skulle skickas till:', formData.email);
-  console.log('Kopia skulle skickas till: borgande@gmail.com');
+  const btn = document.getElementById('interest-submit-btn');
+  const oldText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Skickar…';
 
-  alert(`Tack för din intresseanmälan!\n\nVi har mottagit ditt intresse för Kalymnos-resan och kommer att kontakta dig på ${formData.email} med mer information.\n\nVi ses på klipporna!`);
-  showPage('resor');
+  try {
+    await postJSON(API_INTEREST, payload);
+
+    alert(`Tack för din intresseanmälan!\n\nVi har mottagit ditt intresse och kommer att kontakta dig på ${payload.email}.\n\nVi ses på klipporna!`);
+    showPage('resor');
+  } catch (err) {
+    alert(err.message || 'Något gick fel. Försök igen.');
+  } finally {
+    btn.textContent = oldText;
+    updateInterestSubmitButton();
+  }
 }
 
-function updateSubmitButton() {
-  const name = document.getElementById('name')?.value.trim();
-  const phone = document.getElementById('phone')?.value.trim();
-  const email = document.getElementById('email')?.value.trim();
-  const city = document.getElementById('city')?.value.trim();
-  const address = document.getElementById('address')?.value.trim();
-  const postalcode = document.getElementById('postalcode')?.value.trim();
-  const termsAccepted = document.getElementById('terms-accepted')?.checked;
-
-  const allFieldsFilled = name && phone && email && city && address && postalcode;
-  const emailValid = validateEmail(email || '');
-
-  const submitBtn = document.getElementById('submit-btn');
-  if (submitBtn) submitBtn.disabled = !(allFieldsFilled && emailValid && termsAccepted);
-}
-
-function submitRegistration() {
-  const emailEl = document.getElementById('email');
-  const errEl = document.getElementById('email-error');
-
-  if (emailEl && emailEl.value.trim() && !validateEmail(emailEl.value.trim())) {
-    setFieldError(emailEl, errEl, true, 'Vänligen ange en giltig e-postadress');
-    document.getElementById('registration-status').textContent = 'Fel: E-postadressen är inte giltig.';
-    emailEl.focus();
+async function submitRegistration() {
+  const firstInvalid = validateRegistrationAll();
+  if (firstInvalid) {
+    document.getElementById('registration-status').textContent = 'Formuläret innehåller fel. Kontrollera markerade fält.';
+    firstInvalid.focus();
     return;
   }
 
-  const formData = {
-    namn: document.getElementById('name').value,
-    telefon: document.getElementById('phone').value,
-    email: document.getElementById('email').value,
-    ort: document.getElementById('city').value,
-    adress: document.getElementById('address').value,
-    postnummer: document.getElementById('postalcode').value,
-    kurs: selectedCourseData.date,
-    tid: selectedCourseData.time,
-    pris: selectedCourseData.price
+  const payload = {
+    namn: document.getElementById('name').value.trim(),
+    telefon: document.getElementById('phone').value.trim(),
+    email: document.getElementById('email').value.trim(),
+    ort: document.getElementById('city').value.trim(),
+    adress: document.getElementById('address').value.trim(),
+    postnummer: document.getElementById('postalcode').value.trim(),
+
+    kurs: {
+      typ: 'Topprepsklättring inomhus',
+      datum: selectedCourseData.date,
+      tid: selectedCourseData.time,
+      pris: selectedCourseData.price
+    }
   };
 
-  console.log('Anmälan skickad:', formData);
-  console.log('E-post skulle skickas till:', formData.email);
-  console.log('Kopia skulle skickas till: borgande@gmail.com');
+  const btn = document.getElementById('submit-btn');
+  const oldText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Skickar…';
 
-  alert(`Välkommen på kurs!\n\nDu är nu anmäld till Topprepsklättring inomhus:\nDatum: ${selectedCourseData.date}\nTid: ${selectedCourseData.time}\nPris: ${selectedCourseData.price} kr\n\nEn bekräftelse har skickats till ${formData.email}`);
-  showPage('kurser');
+  try {
+    await postJSON(API_REGISTER, payload);
+
+    alert(`Välkommen på kurs!\n\nDu är nu anmäld till Topprepsklättring inomhus:\nDatum: ${payload.kurs.datum}\nTid: ${payload.kurs.tid}\nPris: ${payload.kurs.pris} kr\n\nEn bekräftelse har skickats till ${payload.email}`);
+    showPage('kurser');
+  } catch (err) {
+    alert(err.message || 'Något gick fel. Försök igen.');
+  } finally {
+    btn.textContent = oldText;
+    updateSubmitButton();
+  }
 }
 </script>
 </body>
